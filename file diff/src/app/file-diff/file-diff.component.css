@@ -1,0 +1,224 @@
+.container {
+    width:100%;
+    float:left;
+    position:relative
+}
+
+.file {
+    width:45%;
+    height:550px;
+    float: left;
+    position:relative;
+    border:2px solid darkslateblue;
+    padding:3px;
+    margin-top:10px;
+}
+
+.btncontainer {
+    width:5%;
+    margin-left:10px;
+    margin-top:5%;
+    height:550px;
+    float:left;
+    position:relative;
+    vertical-align: middle;
+}
+
+.btnsDivs {
+  cursor:pointer;
+  margin-top:10px;
+  margin-bottom: 10px;
+}
+
+.btnsDownArrow {
+  cursor: pointer;
+}
+
+.btnsUpArrow {
+  cursor: pointer;
+}
+
+div.preDiv > pre {
+    height:450px;
+    margin-top:25px;
+    /*overflow:scroll;*/
+    scroll-behavior:smooth;
+}
+
+input[type=file]::file-selector-button {
+  /*background-color: #25cff2;*/
+  background-color: #8f19ff;
+  border-color: #8f19ff;
+  transition: background .02s ease-in-out;
+  padding: 3px;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  color: whitesmoke;
+}
+
+.codespan {
+  white-space: pre;
+}
+
+.spanContentNew {
+  background-color: #13d113;
+  color: white;
+}
+
+.spanContentNotNew{
+ background-color: white;
+ color:black;
+}
+
+.spanContentDeleted {
+  background-color: #ff2c74;
+  color: white;
+}
+
+.spanContentNotDeleted {
+    background-color: white;
+    color:black;
+}
+
+.spanContentMarker {
+  background-color: #8f19ff;
+  color: white;
+  scroll-behavior: smooth;
+}
+
+.diffBtn {
+  margin-left: 43.8% !important;
+}
+
+.upDownBtnActive {
+  cursor: pointer;
+  margin-right: 3px;
+  color: blue;
+  background-color: chartreuse;
+  border-radius: 5px;
+}
+
+.btnStyle {
+    margin-left:20px;
+    margin-right:20px;
+    margin-top:5px;
+    margin-bottom:10px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 20px;
+}
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 18px;
+    left: 4px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+input:checked + .slider {
+  background-color: #8f19ff;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #8f19ff;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 30px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.sliderposition {
+  float: right;
+  top: 16px;
+  position: absolute;
+}
+
+.font10{
+    font-size:10px;
+}
+
+.font12{
+    font-size:12px;
+}
+
+.btn-circle {
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  padding: 6px 0px 0px 0px;
+  /* font-size: 12px; */
+  /* line-height: 1.428571429; */
+  border-radius: 15px;
+  position: relative;
+  top: -1px;
+  left: 2px;  
+}
+
+.delbtn {
+    Height: 5px;
+    width: 5px;
+    position: absolute;
+    top: -6px;
+    left: 3px;
+    color: white;
+}
+
+.glass {
+  backdrop-filter: contrast(130%) brightness(120%) blur(2px);  
+  background-size: 300% 100%;
+  border-radius: 10px;
+  box-shadow:
+    0 2px 1px hsla(0, 0%, 100%, 0.5) inset,
+    0 -2px 1px hsla(250, 70%, 5%, 0.3) inset,
+    0 -2px 6px hsla(0, 0%, 100%, 0.25);
+}
+
+
+.frame {
+  padding: 5px;
+}
+
+.centered {  
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
