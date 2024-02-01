@@ -29,9 +29,9 @@ export class FileDiffComponent implements AfterViewInit {
   public enableHighlight: boolean = false;
 
   preHtml: string = "<pre style=\'height:450px;margin-top:25px;\'><code>";
-  DiffpreOldHtml: string = "<pre id=\'preOld\' style=\'height:485px;margin-top:15px;\'><code>";
-  DiffpreNewHtml: string = "<pre id=\'preNew\' style=\'height:485px;margin-top:15px;\'><code>";
-  postHtml: string = "</code></pre>";
+  DiffpreOldHtml: string = /*"<pre id=\'preOld\' style=\'height:485px;margin-top:15px;\'>*/ "<code>";
+  DiffpreNewHtml: string = /*"<pre id=\'preNew\' style=\'height:485px;margin-top:15px;\'>*/ "<code>";
+  postHtml: string = "</code>";
   result1: string | ArrayBuffer | null = "";
   result2: string | ArrayBuffer | null = "";
 
@@ -61,7 +61,7 @@ export class FileDiffComponent implements AfterViewInit {
   allowPasteMarginLeft: string = "-10px";
 
   constructor(private service: TokenService, private hljs: HighlightJS) {
-    
+
   }
 
   enableEditor() {
@@ -159,12 +159,12 @@ export class FileDiffComponent implements AfterViewInit {
     console.log(this.newFileTokens);
   }
 
-  changeToNotMatchtoken(index: number, oppoNextMatchToken: BaseToken | undefined){    
-      this.oldFileTokens[index].IsDeleted = true;              
+  changeToNotMatchtoken(index: number, oppoNextMatchToken: BaseToken | undefined){
+      this.oldFileTokens[index].IsDeleted = true;
       if( this.oldFileTokens[index].TargetIndex < this.newFileTokens.length){
         let tokenData =  this.oldFileTokens[index];
         this.newFileTokens[tokenData.TargetIndex].IsNew = true;
-        this.newFileTokens[tokenData.TargetIndex].TargetIndex = -1;                
+        this.newFileTokens[tokenData.TargetIndex].TargetIndex = -1;
       }
       this.oldFileTokens[index].TargetIndex = -1;
   }
@@ -180,14 +180,14 @@ export class FileDiffComponent implements AfterViewInit {
         let prevTokenOfSameList = this.findPreviousMatchStringToken(tokenData.Index, FileEnum.OldFile);
         let targetIndex = prevTokenOfSameList.GetPreviousMatchTokenData()?.TargetIndex;
         if(targetIndex){
-          let oppositePrevToken = this.newFileTokens[targetIndex];        
+          let oppositePrevToken = this.newFileTokens[targetIndex];
           let oppositeNextMatch = this.findNextValidStringInOppositeToken(oppositePrevToken.Index, tokenData.Token, FileEnum.NewFile);
           if(oppositeNextMatch.GetNextMatchTokenData()!=undefined){
             let oppoNextMatchTokenData = oppositeNextMatch.GetNextMatchTokenData();
             if(oppoNextMatchTokenData!=undefined){
               if(oppoNextMatchTokenData.Token==tokenData.Token){
                 // both token same so no need of change in TargetIndex and not change in deleted or new
-              } else{                
+              } else{
                 this.changeToNotMatchtoken(tokenData.Index, oppoNextMatchTokenData);
               }
             } else{
@@ -197,7 +197,7 @@ export class FileDiffComponent implements AfterViewInit {
             this.changeToNotMatchtoken(tokenData.Index, undefined);
           }
         }
-      }     
+      }
     }
   }
 
@@ -251,7 +251,7 @@ export class FileDiffComponent implements AfterViewInit {
       }
 
     }
-    
+
 
     return {isValid: false, validRightToken: undefined};
   }
@@ -321,14 +321,14 @@ export class FileDiffComponent implements AfterViewInit {
 
       if (prevElement && !(prevElement.TargetIndex < element.TargetIndex && (!nextElement || nextElement.TargetIndex > element.TargetIndex))) {
         this.oldFileTokens[element.Index].IsDeleted = true;
-        
+
         mismatchLeftTargetIndex.push(element.Index);
 
         if (element.TargetIndex > -1 && element.TargetIndex < this.newFileTokens.length) {
          // this.newFileTokens[element.TargetIndex].TargetIndex = -1;
         }
 
-        //element.TargetIndex = -1;        
+        //element.TargetIndex = -1;
       }
 
     }
@@ -355,7 +355,7 @@ export class FileDiffComponent implements AfterViewInit {
           //this.oldFileTokens[element.TargetIndex].TargetIndex = -1;
         }
 
-        //element.TargetIndex = -1;       
+        //element.TargetIndex = -1;
       }
 
     }
@@ -380,8 +380,8 @@ export class FileDiffComponent implements AfterViewInit {
               }
             }
           }
-        } 
-      
+        }
+
       }
     }
 
@@ -415,7 +415,7 @@ export class FileDiffComponent implements AfterViewInit {
 
         let prevElement = this.findPreviousMatchStringToken(element.Index, FileEnum.OldFile).GetPreviousMatchTokenData();
         let tarprevElement = this.findPreviousMatchStringToken(element.TargetIndex, FileEnum.NewFile).GetPreviousMatchTokenData();
-        
+
         /// Need to fix one token which is in valid token with wrong TargetIndex => Invalid Token
         if ((prevElement &&
                (prevElement.TargetIndex < element.TargetIndex))
@@ -429,15 +429,15 @@ export class FileDiffComponent implements AfterViewInit {
         )
         {
           this.newFileTokens[element.TargetIndex].IsNew = true;
-          this.oldFileTokens[element.Index].IsDeleted = true;          
+          this.oldFileTokens[element.Index].IsDeleted = true;
           this.newFileTokens[element.TargetIndex].TargetIndex = -1;
           this.oldFileTokens[element.Index].TargetIndex = -1;
-        } 
+        }
         else
         {
           if (element.TargetIndex > -1 && element.TargetIndex < this.newFileTokens.length && this.newFileTokens[element.TargetIndex].Token == this.oldFileTokens[element.Index].Token) {
             this.newFileTokens[element.TargetIndex].IsNew = false;
-            this.oldFileTokens[element.Index].IsDeleted = false;            
+            this.oldFileTokens[element.Index].IsDeleted = false;
             this.newFileTokens[element.TargetIndex].TargetIndex = element.Index;
             this.oldFileTokens[element.Index].TargetIndex = element.TargetIndex;
           }
@@ -487,7 +487,7 @@ export class FileDiffComponent implements AfterViewInit {
     for (var p = 0; p < mismatchLeftTargetIndex.length; p++) {
       this.oldFileTokens[mismatchLeftTargetIndex[p]].IsDeleted = true;
       let _targetIndexToChange = this.oldFileTokens[mismatchLeftTargetIndex[p]].TargetIndex;
-      if (_targetIndexToChange != -1) {        
+      if (_targetIndexToChange != -1) {
         this.newFileTokens[_targetIndexToChange].TargetIndex = -1;
         this.oldFileTokens[mismatchLeftTargetIndex[p]].TargetIndex = -1
       }
@@ -496,7 +496,7 @@ export class FileDiffComponent implements AfterViewInit {
     for (var p = 0; p < mismatchRightTargetIndex.length; p++) {
       this.newFileTokens[mismatchRightTargetIndex[p]].IsNew = true;
       let _targetIndexToChange = this.newFileTokens[mismatchRightTargetIndex[p]].TargetIndex;
-      if (_targetIndexToChange != -1) {        
+      if (_targetIndexToChange != -1) {
         this.oldFileTokens[_targetIndexToChange].TargetIndex = -1
         this.newFileTokens[mismatchRightTargetIndex[p]].TargetIndex = -1;
       }
@@ -589,18 +589,18 @@ export class FileDiffComponent implements AfterViewInit {
     this.reIterateNewTokens();
     this.reIterateDeletedTokens();
 
-    this.checkIndexAndTargetIndexForOldFile();
-    this.checkIndexAndTargetIndexForNewFile();
+   // this.checkIndexAndTargetIndexForOldFile();
+    // this.checkIndexAndTargetIndexForNewFile();
 
-    this.oldFileTokenMatchToNewFileTokenMap();
-    this.newFileTokenMatchToOldFileTokenMap();
+    // this.oldFileTokenMatchToNewFileTokenMap();
+    // this.newFileTokenMatchToOldFileTokenMap();
 
     this.normalizeTokens();
 
-    this.calculateSubIndexForLeftTree();
-    this.calculateSubIndexForRightTree();
+   // this.calculateSubIndexForLeftTree();
+    //this.calculateSubIndexForRightTree();
 
-    this.calculateBothSideAreNotMatched();
+    //this.calculateBothSideAreNotMatched();
 
     if (!this.oldFileTokens.some(x => x.IsDeleted) && !this.newFileTokens.some(x => x.IsNew)) {
       if (this.enableFileEditor) {
@@ -609,7 +609,7 @@ export class FileDiffComponent implements AfterViewInit {
       } else {
         // result1 and result2 are applying highlight pipe so no need of conversion to color syntax in code.
         this.DiffOldHtml = this.enableHighlight ? this.preHtml + hljs.highlightAuto(this.file1Content as string).value + this.postHtml : this.preHtml + "<xmp>" + this.file1Content + "</xmp>" + this.postHtml;
-        this.DiffNewHtml = this.enableHighlight ? this.preHtml + hljs.highlightAuto(this.file2Content as string).value + this.postHtml : this.preHtml + "<xmp>" + this.file2Content + "</xmp>" + this.postHtml;        
+        this.DiffNewHtml = this.enableHighlight ? this.preHtml + hljs.highlightAuto(this.file2Content as string).value + this.postHtml : this.preHtml + "<xmp>" + this.file2Content + "</xmp>" + this.postHtml;
       }
     }else {
       this.generateDiffHtml();
@@ -668,7 +668,7 @@ export class FileDiffComponent implements AfterViewInit {
             continue;
           }
 
-          if (nextItem.Moved || nextItem.Inserted) {            
+          if (nextItem.Moved || nextItem.Inserted) {
             insertedItem = nextItem;
             insertedItem.OriginalIndex = nextItem.Moved ? _nextIndex : nextItem.OriginalIndex;
             itemToPush = new OldFile("", -2, false, false);;
@@ -729,7 +729,7 @@ export class FileDiffComponent implements AfterViewInit {
       for (i = 0; i< convertList.length; i++) {
         this.newFileTokens.splice(rightsideTargetIndex, 0, convertList[i]);
       }
-      
+
       currentSelectedToken.IsMarkerInCurrentToken = false;
       currentSelectedToken.IsDeleted = false;
 
@@ -739,7 +739,7 @@ export class FileDiffComponent implements AfterViewInit {
         if (this.oldFileMarkerIndex > -1 && this.oldFileMarkerIndex !=0) {
           this.oldFileMarkerIndex--;
         }
-      }    
+      }
 
       this.generateOldFileHtml();
       this.generateNewFileHtml();
@@ -922,9 +922,10 @@ export class FileDiffComponent implements AfterViewInit {
       const dynamicSpan = document.getElementById('leftspanContentMarker_' + markerTokens[0].Index);
 
       if (dynamicSpan != undefined && dynamicSpan != null) {
-        //const spanPosition = dynamicSpan.getBoundingClientRect().top + container.scrollTop;
-        //dynamicSpan.scrollIntoView(false);
-        container.scrollTop = dynamicSpan.offsetTop - 10;
+        const spanPosition = dynamicSpan.getBoundingClientRect().top + container.scrollTop;
+        dynamicSpan.scrollIntoView(false);
+
+       // container.scrollTop = dynamicSpan.offsetTop - 10;
       }
     }
 
@@ -939,9 +940,10 @@ export class FileDiffComponent implements AfterViewInit {
       const dynamicSpan = document.getElementById('rightspanContentMarker_' + markerTokens[0].Index);
 
       if (dynamicSpan != undefined && dynamicSpan != null) {
-        //const spanPosition = dynamicSpan.getBoundingClientRect().top + container.scrollTop;
-        //dynamicSpan.scrollIntoView(false);
-        container.scrollTop = dynamicSpan.offsetTop - 10;
+        const spanPosition = dynamicSpan.getBoundingClientRect().top + container.scrollTop;
+        dynamicSpan.scrollIntoView(false);
+
+        //container.scrollTop = dynamicSpan.offsetTop - 10;
       }
     }
 
@@ -984,7 +986,7 @@ export class FileDiffComponent implements AfterViewInit {
 
      //////// this.generateDiffHtml();
 
-     //// this.oldFileClearTimeOut = setTimeout(this.scrollLeftFile, 100, this);
+      this.oldFileClearTimeOut = setTimeout(this.scrollLeftFile, 100, this);
     }
   }
 
@@ -1015,7 +1017,7 @@ export class FileDiffComponent implements AfterViewInit {
       }
 
       /////this.generateDiffHtml();
-     ///// this.oldFileClearTimeOut = setTimeout(this.scrollLeftFile, 100, this);
+      this.oldFileClearTimeOut = setTimeout(this.scrollLeftFile, 100, this);
     }
   }
 
@@ -1046,7 +1048,7 @@ export class FileDiffComponent implements AfterViewInit {
       }
 
       /////this.generateDiffHtml();
-      /// this.newFileClearTimeout = setTimeout(this.scrollRightFile, 100, this);
+       this.newFileClearTimeout = setTimeout(this.scrollRightFile, 100, this);
     }
   }
 
@@ -1077,7 +1079,7 @@ export class FileDiffComponent implements AfterViewInit {
       }
 
       //////this.generateDiffHtml();
-      /// this.newFileClearTimeout = setTimeout(this.scrollRightFile, 100, this);
+       this.newFileClearTimeout = setTimeout(this.scrollRightFile, 100, this);
     }
   }
 
@@ -1249,14 +1251,14 @@ export class FileDiffComponent implements AfterViewInit {
       let index = this.oldFileTokens.findIndex(x=>x.Index==id);
 
       let delTokens = this.oldFileTokens.filter(x=>x.IsDeleted);
-  
+
       if(this.oldFileMarkerIndex == delTokens.length-1){
         this.oldFileMarkerIndex--;
-      } 
+      }
 
-      this.oldFileTokens.splice(index,1);  
+      this.oldFileTokens.splice(index,1);
       this.generateOldFileHtml();
-      return;    
+      return;
     }
 
   }
@@ -1277,14 +1279,14 @@ export class FileDiffComponent implements AfterViewInit {
       let index = this.newFileTokens.findIndex(x=>x.Index==id);
 
       let newTokens = this.newFileTokens.filter(x=>x.IsNew);
-  
+
       if (this.newFileMarkerIndex == newTokens.length-1){
         this.newFileMarkerIndex--;
-      } 
+      }
 
-      this.newFileTokens.splice(index,1);  
+      this.newFileTokens.splice(index,1);
       this.generateNewFileHtml();
-      return;    
+      return;
     }
 
   }
@@ -1321,7 +1323,7 @@ export class FileDiffComponent implements AfterViewInit {
 
   generateOldFileHtml() {
     let resConcat = "";
-    
+
     for (let i = 0; i < this.oldFileTokens.length; i++) {
       let tokenData = this.oldFileTokens[i];
       if (tokenData.IsDeleted) {
@@ -1351,13 +1353,13 @@ export class FileDiffComponent implements AfterViewInit {
         }
         i++;
       } else {
-        
+
         this.newFileTokens[j].IsNew = false;
         this.newFileTokens[j].TargetIndex = this.oldFileTokens[i].Index;
-        
+
         this.oldFileTokens[i].IsDeleted = false;
         this.oldFileTokens[i].TargetIndex = this.newFileTokens[j].Index;
-       
+
         i++;
         j++;
       }
@@ -1461,7 +1463,7 @@ export class FileDiffComponent implements AfterViewInit {
     let nextValidMatchTokenForOld!: OldFile | undefined;
 
     if (type == FileEnum.NewFile) {
-    
+
       do {
         index++;
 
@@ -1472,13 +1474,13 @@ export class FileDiffComponent implements AfterViewInit {
 
         nextValidMatchTokenForNew = this.newFileTokens[index];
 
-        if(nextValidMatchTokenForNew.Token!='' 
-            && nextValidMatchTokenForNew.Token!=' ' 
-            && nextValidMatchTokenForNew.Token!='\n' 
-            && nextValidMatchTokenForNew.Token == token){          
+        if(nextValidMatchTokenForNew.Token!=''
+            && nextValidMatchTokenForNew.Token!=' '
+            && nextValidMatchTokenForNew.Token!='\n'
+            && nextValidMatchTokenForNew.Token == token){
           break;
         }
-       
+
       }
       while (this.IsObjectDefined(nextValidMatchTokenForNew)
         && (nextValidMatchTokenForNew.Token == this.getNewLineBasedOnEditor()
@@ -1502,13 +1504,13 @@ export class FileDiffComponent implements AfterViewInit {
 
         nextValidMatchTokenForOld = this.oldFileTokens[index];
 
-        if(nextValidMatchTokenForOld.Token!='' 
-        && nextValidMatchTokenForOld.Token!=' ' 
+        if(nextValidMatchTokenForOld.Token!=''
+        && nextValidMatchTokenForOld.Token!=' '
         && nextValidMatchTokenForOld.Token!='\n'
-        && nextValidMatchTokenForOld.Token == token){       
+        && nextValidMatchTokenForOld.Token == token){
           break;
         }
-                
+
       }
       while (this.IsObjectDefined(nextValidMatchTokenForOld)
         && (nextValidMatchTokenForOld.Token == this.getNewLineBasedOnEditor()
@@ -1752,7 +1754,7 @@ export class FileDiffComponent implements AfterViewInit {
     fileReader.onloadend = function (x) {
       self.file1Content = fileReader.result;
       self.result1 = self.preHtml + self.file1Content + self.postHtml;
-      
+
       self.file1LoadedCallback();
     }
     fileReader.readAsText(file);
@@ -1772,7 +1774,7 @@ export class FileDiffComponent implements AfterViewInit {
   }
 
   file1EditorChange($event: any) {
-    this.file1Content = $event.target.innerText;       
+    this.file1Content = $event.target.innerText;
   }
 
   async file2EditorChange($event: any) {

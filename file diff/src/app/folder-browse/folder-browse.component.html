@@ -168,22 +168,31 @@
 
                                   <div class="col-md-5" style="width:46%; height: 520px;border: 2px solid blue;">
 
-                                    <div id="oldFileDiv1" class="preDiv" (click)="selectedFile?.spanClickOld($event)"
-                                        *ngIf="selectedFile?.DiffOldHtml!='' && selectedFile?.DiffOldHtml!=null && selectedFile?.isSingleFile==false
-                                        && (selectedMergedItem?.IsHaveDeletedTokens || selectedMergedItem?.IsHaveNewTokens)"
-                                        [innerHTML]="selectedFile?.DiffOldHtml | marker: selectedFile?.oldFileMarkerIndex : selectedFile?.oldFileTokens : selectedFile?.enableFileEditor : selectedFile?.markerType  | safeHtml">
-                                    </div>
+                                      <div id="oldFileDiv1" class="preDiv" (click)="selectedFile?.spanClickOld($event)"
+                                           *ngIf="selectedFile?.DiffOldHtml!='' && selectedFile?.DiffOldHtml!=null && selectedFile?.isSingleFile==false
+                                        && (selectedMergedItem?.IsHaveDeletedTokens || selectedMergedItem?.IsHaveNewTokens)">
+                                          <pre id='preNew' style='height:485px;margin-top:15px;'
+                                               [innerHTML]="selectedFile?.DiffOldHtml | marker: selectedFile?.oldFileMarkerIndex : selectedFile?.oldFileTokens : selectedFile?.enableFileEditor : selectedFile?.markerType  | safeHtml">
 
-                                     <div id="oldFileDiv2" class="preDiv" (click)="selectedFile?.spanClickOld($event)"
-                                        *ngIf="selectedFile?.DiffOldHtml!='' && selectedFile?.DiffOldHtml!=null && selectedFile?.isSingleFile==true"
-                                        [innerHTML]="selectedFile?.DiffOldHtml | marker: selectedFile?.oldFileMarkerIndex : selectedFile?.oldFileTokens : selectedFile?.enableFileEditor : selectedFile?.markerType | safeHtml">
-                                    </div>
+                                            </pre>
+                                      </div>
 
-                                    <div id="oldFileDiv3" class="preDiv" (click)="selectedFile?.spanClickOld($event)"
-                                        *ngIf="selectedFile?.DiffOldHtml!='' && selectedFile?.DiffOldHtml!=null && selectedFile?.isSingleFile==false
-                                        && !selectedMergedItem?.IsHaveDeletedTokens && !selectedMergedItem?.IsHaveNewTokens"
-                                        [innerHTML]="selectedFile?.result1 | highlightcode: EnableHighlight | safeHtml">
-                                    </div>
+                                      <div id="oldFileDiv2" class="preDiv" (click)="selectedFile?.spanClickOld($event)"
+                                           *ngIf="selectedFile?.DiffOldHtml!='' && selectedFile?.DiffOldHtml!=null && selectedFile?.isSingleFile==true">
+                                          <pre id='preNew' style='height:485px;margin-top:15px;'
+                                               [innerHTML]="selectedFile?.DiffOldHtml | marker: selectedFile?.oldFileMarkerIndex : selectedFile?.oldFileTokens : selectedFile?.enableFileEditor : selectedFile?.markerType | safeHtml">
+
+                                          </pre>
+                                      </div>
+
+                                      <div id="oldFileDiv3" class="preDiv" (click)="selectedFile?.spanClickOld($event)"
+                                           *ngIf="selectedFile?.DiffOldHtml!='' && selectedFile?.DiffOldHtml!=null && selectedFile?.isSingleFile==false
+                                        && !selectedMergedItem?.IsHaveDeletedTokens && !selectedMergedItem?.IsHaveNewTokens">
+                                          <pre id='preNew' style='height:485px;margin-top:15px;'
+                                               [innerHTML]="selectedFile?.result1 | highlightcode: EnableHighlight | safeHtml">
+
+                                          </pre>
+                                      </div>
 
                                   </div>
 
@@ -239,22 +248,31 @@
                                 </div>
 
                                 <div class="col-md-5" style="width:46%; height: 520px;border: 2px solid blue;">
-                                  <div id="newFileDiv1" class="preDiv" (click)="selectedFile?.spanClickNew($event)"
-                                      *ngIf="selectedFile?.DiffNewHtml!='' && selectedFile?.DiffNewHtml!=null && selectedFile?.isSingleFile==false
-                                      && (selectedMergedItem?.IsHaveDeletedTokens || selectedMergedItem?.IsHaveNewTokens)"
-                                      [innerHTML]="selectedFile?.DiffNewHtml | marker: selectedFile?.newFileMarkerIndex : selectedFile?.newFileTokens : selectedFile?.enableFileEditor : selectedFile?.markerType | safeHtml">
-                                  </div>
+                                    <div id="newFileDiv1" class="preDiv" (click)="selectedFile?.spanClickNew($event)"
+                                         *ngIf="selectedFile?.DiffNewHtml!='' && selectedFile?.DiffNewHtml!=null && selectedFile?.isSingleFile==false
+                                      && (selectedMergedItem?.IsHaveDeletedTokens || selectedMergedItem?.IsHaveNewTokens)">
+                                        <pre id='preNew' style='height:485px;margin-top:15px;'
+                                          [innerHTML]="selectedFile?.DiffNewHtml | marker: selectedFile?.newFileMarkerIndex : selectedFile?.newFileTokens : selectedFile?.enableFileEditor : selectedFile?.markerType | safeHtml">
 
-                                  <div id="newFileDiv2" class="preDiv" (click)="selectedFile?.spanClickNew($event)"
-                                   *ngIf="selectedFile?.DiffNewHtml!='' && selectedFile?.DiffNewHtml!=null && selectedFile?.isSingleFile==true"
-                                    [innerHTML]="selectedFile?.DiffNewHtml | marker: selectedFile?.newFileMarkerIndex : selectedFile?.newFileTokens : selectedFile?.enableFileEditor : selectedFile?.markerType | safeHtml">
-                                  </div>
+                                        </pre>
+                                    </div>
 
-                                  <div id="newFileDiv3" class="preDiv" (click)="selectedFile?.spanClickNew($event)"
-                                  *ngIf="selectedFile?.DiffNewHtml!='' && selectedFile?.DiffNewHtml!=null && selectedFile?.isSingleFile==false
-                                      && !selectedMergedItem?.IsHaveDeletedTokens && !selectedMergedItem?.IsHaveNewTokens"
-                                   [innerHTML]="selectedFile?.result2 | highlightcode: EnableHighlight  | safeHtml">
-                                 </div>
+                                    <div id="newFileDiv2" class="preDiv" (click)="selectedFile?.spanClickNew($event)"
+                                         *ngIf="selectedFile?.DiffNewHtml!='' && selectedFile?.DiffNewHtml!=null && selectedFile?.isSingleFile==true">
+                                        <pre id='preNew' style='height:485px;margin-top:15px;'
+                                             [innerHTML]="selectedFile?.DiffNewHtml | marker: selectedFile?.newFileMarkerIndex : selectedFile?.newFileTokens : selectedFile?.enableFileEditor : selectedFile?.markerType | safeHtml">
+
+                                        </pre>
+                                    </div>
+
+                                    <div id="newFileDiv3" class="preDiv" (click)="selectedFile?.spanClickNew($event)"
+                                         *ngIf="selectedFile?.DiffNewHtml!='' && selectedFile?.DiffNewHtml!=null && selectedFile?.isSingleFile==false
+                                      && !selectedMergedItem?.IsHaveDeletedTokens && !selectedMergedItem?.IsHaveNewTokens">
+                                        <pre id='preNew' style='height:485px;margin-top:15px;'
+                                             [innerHTML]="selectedFile?.result2 | highlightcode: EnableHighlight  | safeHtml">
+
+                                            </pre>
+                                    </div>
 
                           </div>
                         </div>

@@ -65,34 +65,39 @@
       <input id="oldfileupload" class="font12" *ngIf="enableFileEditor==false" type="file" (change)="onFile1Selected($event)" />
       <div>
 
-        <div id="oldFileDiv" class="preDiv" (click)="spanClickOld($event)"
-             *ngIf="DiffOldHtml!=''"
-             [innerHTML]="DiffOldHtml | marker: oldFileMarkerIndex : oldFileTokens : enableFileEditor : markerType | safeHtml ">
-        </div>
+          <!-- <div id="oldFileDiv" class="preDiv" (click)="spanClickOld($event)"
+               *ngIf="DiffOldHtml!=''"
+               [innerHTML]="DiffOldHtml | marker: oldFileMarkerIndex : oldFileTokens : enableFileEditor : markerType | safeHtml ">
+          </div> -->
 
-<!--        <div id="oldFileDiv" class="preDiv" (click)="spanClickOld($event)">-->
-<!--          <pre>-->
+          <div id="oldFileDiv" class="preDiv" (click)="spanClickOld($event)"
+               *ngIf="DiffOldHtml!=''">
+              <pre id='preOld' style='height:485px;margin-top:15px;'
+                    [innerHTML]="DiffOldHtml | marker: oldFileMarkerIndex : oldFileTokens : enableFileEditor : markerType | safeHtml ">                  
+              </pre>
+          </div>
 
-<!--              <span class="codespan" *ngFor="let item of oldFileTokens">-->
-<!--                <span  class="codespan" *ngIf="item.IsDeleted">-->
-<!--                  <span id="{{item.Index}}" class='spanContentDeleted codespan'>{{item.Token}}"</span><span> </span>-->
-<!--                </span>-->
-<!--                <span  class="codespan"  *ngIf="!item.IsDeleted && item.IsMarkerInCurrentToken">-->
-<!--                   <span id="leftspanContentMarker_{{item.Index}}"  class='spanContentMarker codespan'>{{item.Token}}</span><span> </span>";-->
-<!--                </span>-->
-<!--                <span  class="codespan"  *ngIf="!item.IsDeleted && !item.IsMarkerInCurrentToken">-->
-<!--                   <span id="{{item.Index}}"  class='spanContentNotDeleted codespan'>{{item.Token}}</span><span> </span>-->
-<!--                </span>-->
-<!--              </span>-->
+          <!--        <div id="oldFileDiv" class="preDiv" (click)="spanClickOld($event)">-->
+          <!--          <pre>-->
+          <!--              <span class="codespan" *ngFor="let item of oldFileTokens">-->
+          <!--                <span  class="codespan" *ngIf="item.IsDeleted">-->
+          <!--                  <span id="{{item.Index}}" class='spanContentDeleted codespan'>{{item.Token}}"</span><span> </span>-->
+          <!--                </span>-->
+          <!--                <span  class="codespan"  *ngIf="!item.IsDeleted && item.IsMarkerInCurrentToken">-->
+          <!--                   <span id="leftspanContentMarker_{{item.Index}}"  class='spanContentMarker codespan'>{{item.Token}}</span><span> </span>";-->
+          <!--                </span>-->
+          <!--                <span  class="codespan"  *ngIf="!item.IsDeleted && !item.IsMarkerInCurrentToken">-->
+          <!--                   <span id="{{item.Index}}"  class='spanContentNotDeleted codespan'>{{item.Token}}</span><span> </span>-->
+          <!--                </span>-->
+          <!--              </span>-->
+          <!--          </pre>-->
+          <!--        </div>-->
 
-<!--          </pre>-->
-<!--        </div>-->
+          <div class="preDiv" *ngIf="DiffOldHtml=='' && enableFileEditor==false" [innerHtml]="result1 | highlightcode: enableHighlight | safeHtml"></div>
 
-        <div class="preDiv" *ngIf="DiffOldHtml=='' && enableFileEditor==false" [innerHtml]="result1 | highlightcode: enableHighlight | safeHtml"></div>
-
-        <pre #file1Editor *ngIf="DiffOldHtml=='' && enableFileEditor==true" contenteditable="true" style="height: 535px; overflow: scroll"
-             class="preDiv"             
-             (input)="file1EditorChange($event)">
+          <pre #file1Editor *ngIf="DiffOldHtml=='' && enableFileEditor==true" contenteditable="true" style="height: 535px; overflow: scroll"
+               class="preDiv"
+               (input)="file1EditorChange($event)">
 
       </pre>
       </div>
@@ -146,8 +151,13 @@
     <div class="file">
       <input id="newfileupload" class="font12" *ngIf="enableFileEditor==false" type="file" (change)="onFile2Selected($event)" />
       <div>
-        <div id="newFileDiv" class="preDiv" (click)="spanClickNew($event)" *ngIf="DiffNewHtml!=''" [innerHTML]="DiffNewHtml | marker: newFileMarkerIndex : newFileTokens : enableFileEditor : markerType |  safeHtml">
-        </div>
+
+          <div id="newFileDiv" class="preDiv" (click)="spanClickNew($event)" *ngIf="DiffNewHtml!=''">
+              <pre id='preNew' style='height:485px;margin-top:15px;'
+                        [innerHTML]="DiffNewHtml | marker: newFileMarkerIndex : newFileTokens : enableFileEditor : markerType |  safeHtml">
+              </pre>
+          </div>
+
         <div class="preDiv" *ngIf="DiffNewHtml=='' && enableFileEditor==false" [innerHtml]="result2 | highlightcode: enableHighlight | safeHtml"></div>
 
         <pre #file2Editor *ngIf="DiffNewHtml=='' && enableFileEditor==true"
