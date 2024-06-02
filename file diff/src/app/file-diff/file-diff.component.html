@@ -33,7 +33,7 @@
             Compare Files
           </button>
 
-        </div>        
+        </div>
 
         <div class="col float-end">
           <div class="">
@@ -72,9 +72,9 @@
 
           <div id="oldFileDiv" class="preDiv" (click)="spanClickOld($event)"
                *ngIf="DiffOldHtml!=''">
-              <pre id='preOld' style='height:485px;margin-top:15px;'
-                    [innerHTML]="DiffOldHtml | marker: oldFileMarkerIndex : oldFileTokens : enableFileEditor : markerType | safeHtml ">                  
-              </pre>
+              <div id='preOld' style='height:485px;margin-top:15px;'
+                    [innerHTML]="DiffOldHtml | marker: oldFileMarkerIndex : oldFileTokens : enableFileEditor : markerType : enableHighlight | safeHtml ">
+              </div>
           </div>
 
           <!--        <div id="oldFileDiv" class="preDiv" (click)="spanClickOld($event)">-->
@@ -95,7 +95,7 @@
 
           <div class="preDiv" *ngIf="DiffOldHtml=='' && enableFileEditor==false" [innerHtml]="result1 | highlightcode: enableHighlight | safeHtml"></div>
 
-          <pre #file1Editor *ngIf="DiffOldHtml=='' && enableFileEditor==true" contenteditable="true" style="height: 535px; overflow: scroll"
+          <pre #file1Editor *ngIf="DiffOldHtml=='' && enableFileEditor==true" contenteditable="true" style="height: 475px; overflow: scroll"
                class="preDiv"
                (input)="file1EditorChange($event)">
 
@@ -153,15 +153,15 @@
       <div>
 
           <div id="newFileDiv" class="preDiv" (click)="spanClickNew($event)" *ngIf="DiffNewHtml!=''">
-              <pre id='preNew' style='height:485px;margin-top:15px;'
-                        [innerHTML]="DiffNewHtml | marker: newFileMarkerIndex : newFileTokens : enableFileEditor : markerType |  safeHtml">
-              </pre>
+              <div id='preNew' style='height:485px;margin-top:15px;'
+                        [innerHTML]="DiffNewHtml | marker: newFileMarkerIndex : newFileTokens : enableFileEditor : markerType : enableHighlight|  safeHtml">
+              </div>
           </div>
 
         <div class="preDiv" *ngIf="DiffNewHtml=='' && enableFileEditor==false" [innerHtml]="result2 | highlightcode: enableHighlight | safeHtml"></div>
 
         <pre #file2Editor *ngIf="DiffNewHtml=='' && enableFileEditor==true"
-             style="height:535px;overflow:scroll" class="preDiv"
+             style="height:475px;overflow:scroll" class="preDiv"
              contenteditable="true" (input)="file2EditorChange($event)">
 
       </pre>

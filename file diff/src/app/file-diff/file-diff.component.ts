@@ -28,10 +28,10 @@ export class FileDiffComponent implements AfterViewInit {
   enableFolderBrowse: boolean = false;
   public enableHighlight: boolean = false;
 
-  preHtml: string = "<pre style=\'height:450px;margin-top:25px;\'><code>";
-  DiffpreOldHtml: string = /*"<pre id=\'preOld\' style=\'height:485px;margin-top:15px;\'>*/ "<code>";
-  DiffpreNewHtml: string = /*"<pre id=\'preNew\' style=\'height:485px;margin-top:15px;\'>*/ "<code>";
-  postHtml: string = "</code>";
+  preHtml: string = "<pre style=\'height:410px;margin-top:25px;\'><code>";
+  DiffpreOldHtml: string = "<pre style=\'height:410px;margin-top:25px;\'> <code>";
+  DiffpreNewHtml: string = "<pre style=\'height:410px;margin-top:25px;\'> <code>";
+  postHtml: string = "</code></pre>";
   result1: string | ArrayBuffer | null = "";
   result2: string | ArrayBuffer | null = "";
 
@@ -1338,6 +1338,7 @@ export class FileDiffComponent implements AfterViewInit {
     }
 
     this.DiffOldHtml = this.DiffpreOldHtml +  resConcat  + this.postHtml;
+
   }
 
   findDeletedTokensInOldFile() {
