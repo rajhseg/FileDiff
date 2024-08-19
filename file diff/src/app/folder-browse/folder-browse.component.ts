@@ -185,6 +185,7 @@ export class FolderBrowseComponent implements AfterViewInit {
       }
 
     if (this.leftSideDirectory!=null && this.leftSideDirectory!=undefined){
+          this.leftTree = [];
           let tItem: TreeItem = new TreeItem();
           tItem.ImageUrl = "assets/folder.png";
           tItem.DisplayText = this.leftSideDirectory.Folders[0].Name;
@@ -202,6 +203,7 @@ export class FolderBrowseComponent implements AfterViewInit {
       }
 
     if (this.rightSideDirectory!=null && this.rightSideDirectory!=undefined){
+          this.rightTree = [];
           let tItem: TreeItem = new TreeItem();
           tItem.ImageUrl = "assets/folder.png";
           tItem.DisplayText = this.rightSideDirectory.Folders[0].Name;
