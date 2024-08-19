@@ -101,17 +101,18 @@
           <progress style="width: 98%;height: 10px;"  max="100">  </progress>
         </span>
 
-        <ul id="leftUL" style="margin-left: 4px; padding-top: 4px; padding-bottom: 20px; color: #c0b6b6 ">
-        </ul>
-
+        <rtree [Items]="leftTree" 
+              style="margin-left: 4px; padding-top: 4px; padding-bottom: 20px; color: #c0b6b6 ">
+        </rtree>
       </div>
       <div style="margin-left: 50%; height: 190px; overflow-y: scroll;border:solid 1px blue; font-size: 0px;">
         <span *ngIf="rightDirLoadIsInProgress" style="padding:3px;width:100%;">
           <progress style="width: 98%;height: 10px;"  max="100">  </progress>
         </span>
-
-        <ul id="rightUL" style="margin-left: -25px; padding-top: 4px; padding-bottom: 4px; color: #c0b6b6 ">
-        </ul>
+        
+        <rtree [Items]="rightTree" 
+               style="margin-left: -25px; padding-top: 4px; padding-bottom: 4px; color: #c0b6b6 ">
+        </rtree>
 
       </div>
     </div>

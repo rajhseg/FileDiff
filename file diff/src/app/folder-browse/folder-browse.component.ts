@@ -14,12 +14,14 @@ import {
   HIGHLIGHT_OPTIONS,
  
 } from 'ngx-highlightjs';
+import { TreeItem } from '../Tree/TreeModel';
+import { TreeComponent } from '../Tree/tree.component';
 
 @Component({
   selector: 'app-folder-browse',
   templateUrl: './folder-browse.component.html',
   styleUrls: ['./folder-browse.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,    
 })
 export class FolderBrowseComponent implements AfterViewInit {
 
@@ -36,6 +38,9 @@ export class FolderBrowseComponent implements AfterViewInit {
   dialogRef:any | undefined = undefined;
   leftSideDirectory: Directory | null = new Directory();
   rightSideDirectory: Directory | null = new Directory();
+
+  leftTree: TreeItem[]=[];
+  rightTree: TreeItem[] = [];
 
   fileList1: any;
   fileList2: any;
@@ -144,61 +149,31 @@ export class FolderBrowseComponent implements AfterViewInit {
     }
   }
 
-  generateFoldersFilesForTree(dir: Directory, parentElement: HTMLElement) {
+  generateFoldersFilesForTree(dir: Directory, parentElement: TreeItem) {
 
-    if(dir==undefined || dir==null)
+    if (dir == undefined || dir == null)
       return;
 
-    const listItem: HTMLLIElement = document.createElement('li');
-    const folderImage: any = document.getElementById("folderImage")?.cloneNode(true);
-    const fileImage: any = document.getElementById("fileImage")?.cloneNode(true);
-
-    if(dir.Files.length > 0 || dir.Folders.length > 0){
-      const spanele: HTMLSpanElement = document.createElement('span');
-      const spanele1: HTMLSpanElement = document.createElement('span');
-
-      spanele.classList.add('caret');
-      spanele.style.font = "menu";
-
-      spanele.appendChild(folderImage);
-      spanele1.textContent = dir.Name;
-
-      spanele.appendChild(spanele1);
-
-      const ulEle: HTMLUListElement = document.createElement("ul");
-      ulEle.classList.add("nested");
+    if (dir.Files.length > 0 || dir.Folders.length > 0) {
 
       dir.Folders.sort(this.compareSort);
 
-      for(let i=0; i<dir.Folders.length; i++){
-        this.generateFoldersFilesForTree(dir.Folders[i], ulEle);
+      for (let i = 0; i < dir.Folders.length; i++) {        
+        let ctItem: TreeItem = new TreeItem();
+        ctItem.ImageUrl = "assets/folder.png";
+        ctItem.DisplayText = dir.Folders[i].Name;
+        parentElement.Childrens.push(ctItem);
+        this.generateFoldersFilesForTree(dir.Folders[i], ctItem);
       }
 
       dir.Files.sort(this.compareSort);
 
-      for(let i=0;i<dir.Files.length; i++){
-        const listItem1: HTMLLIElement = document.createElement('li');
-        const spanele2: HTMLSpanElement = document.createElement('span');
-        spanele2.style.font = "menu";
-        spanele2.textContent = dir.Files[i].name;
-        //listItem1.appendChild(fileImage);
-        listItem1.appendChild(spanele2);
-
-        ulEle.appendChild(listItem1);
+      for (let i = 0; i < dir.Files.length; i++) {
+        let tItem1: TreeItem = new TreeItem();        
+        tItem1.DisplayText = dir.Files[i].name;
+        parentElement.Childrens.push(tItem1);
       }
-
-      listItem.appendChild(spanele);
-      listItem.appendChild(ulEle);
     }
-    else {
-      const spanele2: HTMLSpanElement = document.createElement('span');
-
-      spanele2.textContent = dir.Name;
-      //listItem.appendChild(fileImage);
-      listItem.appendChild(spanele2);
-    }
-
-    parentElement.appendChild(listItem);
   }
 
   generateLeftTree(){
@@ -210,8 +185,12 @@ export class FolderBrowseComponent implements AfterViewInit {
       }
 
     if (this.leftSideDirectory!=null && this.leftSideDirectory!=undefined){
-          this.generateFoldersFilesForTree(this.leftSideDirectory.Folders[0], this.fileList1);
-          this.expandEnable();
+          let tItem: TreeItem = new TreeItem();
+          tItem.ImageUrl = "assets/folder.png";
+          tItem.DisplayText = this.leftSideDirectory.Folders[0].Name;
+          this.leftTree.push(tItem);
+          this.generateFoldersFilesForTree(this.leftSideDirectory.Folders[0], tItem);      
+          this.leftDirLoadIsInProgress = false;   
       }
   }
 
@@ -223,8 +202,12 @@ export class FolderBrowseComponent implements AfterViewInit {
       }
 
     if (this.rightSideDirectory!=null && this.rightSideDirectory!=undefined){
-          this.generateFoldersFilesForTree(this.rightSideDirectory.Folders[0], this.fileList2);
-          this.expandEnable();
+          let tItem: TreeItem = new TreeItem();
+          tItem.ImageUrl = "assets/folder.png";
+          tItem.DisplayText = this.rightSideDirectory.Folders[0].Name;
+          this.rightTree.push(tItem);
+          this.generateFoldersFilesForTree(this.rightSideDirectory.Folders[0], tItem); 
+          this.rightDirLoadIsInProgress = false;         
       }
   }
 

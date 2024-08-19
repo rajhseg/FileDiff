@@ -23,6 +23,7 @@ import {
   HIGHLIGHT_OPTIONS,
 } from 'ngx-highlightjs';
 import { MarkerPipe } from './marker.pipe';
+import { TreeComponent } from './Tree/tree.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { MarkerPipe } from './marker.pipe';
     HighlightdiffcodePipe,
     HighlightnewdiffcodePipe,
     MarkerPipe,
+    TreeComponent
   ],
   imports: [
     MatButtonModule,
